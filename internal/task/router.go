@@ -3,7 +3,7 @@ package task
 import (
 	"fmt"
 	"time"
-	
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,12 +23,12 @@ func RouteTasks(router *gin.Engine) {
 			// param.ErrorMessage,
 		)
 	}))
-	
+
 	t.Use(gin.Recovery())
-	
-	t.GET("")
-	t.GET("/:id")
-	t.POST("")
-	t.PUT("/:id")
-	t.DELETE("/:id")
+
+	t.GET("", GetAllTasks)
+	t.GET("/:id", GetSingleTask)
+	t.POST("/new", CreateNewTask)
+	t.PUT("/:id", UpdateTask)
+	t.DELETE("/:id", DeleteTask)
 }

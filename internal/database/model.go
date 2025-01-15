@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 )
 
 const (
@@ -22,7 +23,7 @@ func (db *Database) CreateTable(name string, cols []Column) (*Table, error) {
 	if db.ifTableExists(name) {
 		return &Table{}, fmt.Errorf("a table with the name '%s' already exists", name)
 	}
-	
+
 	newTable := NewTable(name, cols)
 	db.tables[newTable.Name] = newTable
 	return &newTable, nil
@@ -66,4 +67,8 @@ type Expression struct {
 type Set struct {
 	Column string
 	Value  any
+}
+
+func GetRandomID() string {
+	return uuid.New().String()
 }
